@@ -2,7 +2,11 @@ package com.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,6 +29,10 @@ public class Account extends baseEntity {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
 	private String username;
 	
 	private String password;
@@ -33,7 +41,7 @@ public class Account extends baseEntity {
 	
 	
 	// one to many with QuizTopic
-	@OneToMany(mappedBy = "account")
+	@OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST})
 	private Set<QuizTopic> quizTopics;
 	
 	
